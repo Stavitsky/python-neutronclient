@@ -353,6 +353,7 @@ class Client(ClientBase):
     security_group_path = "/security-groups/%s"
     security_group_rules_path = "/security-group-rules"
     security_group_rule_path = "/security-group-rules/%s"
+    vlans_path = "/vlan-allocations"
     vpnservices_path = "/vpn/vpnservices"
     vpnservice_path = "/vpn/vpnservices/%s"
     ipsecpolicies_path = "/vpn/ipsecpolicies"
@@ -440,6 +441,7 @@ class Client(ClientBase):
                      'ipsec_site_connections': 'ipsec_site_connection',
                      'vpnservices': 'vpnservice',
                      'vips': 'vip',
+                     'vlan_allocations': 'vlan_allocation',
                      'pools': 'pool',
                      'members': 'member',
                      'health_monitors': 'health_monitor',
@@ -682,6 +684,12 @@ class Client(ClientBase):
         """Removes an external network gateway from the specified router."""
         return self.put((self.router_path % router),
                         body={'router': {'external_gateway_info': {}}})
+
+    @APIParamsCall
+    def list_vlan_allocations(self, retrieve_all=True, **_params):
+        """Fetches a list of all VLANs."""
+        return self.list('vlan_allocations', self.vlans_path, retrieve_all,
+                         **_params)
 
     @APIParamsCall
     def list_floatingips(self, retrieve_all=True, **_params):
