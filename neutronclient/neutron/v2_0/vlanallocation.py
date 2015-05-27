@@ -7,5 +7,4 @@ class ListVlanAllocations(neutronV20.ListCommand):
     resource = 'vlan_allocation'
     list_columns = ['vlan_id', 'physical_network', 'allocated']
     _formatters = {}
-    pagination_support = False
-    sorting_support = False
+    pagination_support = True
